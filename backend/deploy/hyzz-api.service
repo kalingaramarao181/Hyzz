@@ -1,0 +1,21 @@
+[Unit]
+Description=Hyzz Node API
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=simple
+User=hyzz
+Group=hyzz
+WorkingDirectory=/opt/hyzz/backend
+Environment=NODE_ENV=production
+EnvironmentFile=/opt/hyzz/backend/.env
+ExecStart=/usr/bin/node /opt/hyzz/backend/src/server.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+UMask=0077
+[Install]
+WantedBy=multi-user.target

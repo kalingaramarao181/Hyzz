@@ -1,0 +1,1644 @@
+{
+  "has_permission": {
+    "type": "object",
+    "properties": {
+      "p_permission": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_permission"
+    ],
+    "additionalProperties": false
+  },
+  "my_profile": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "update_my_profile": {
+    "type": "object",
+    "properties": {
+      "p_name": {
+        "type": "string"
+      },
+      "p_phone": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "p_name"
+    ],
+    "additionalProperties": false
+  },
+  "estimate_fare": {
+    "type": "object",
+    "properties": {
+      "p_service": {
+        "type": "string"
+      },
+      "p_hours": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "required": [
+      "p_service",
+      "p_hours"
+    ],
+    "additionalProperties": false
+  },
+  "create_booking": {
+    "type": "object",
+    "properties": {
+      "p_request_key": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_address": {
+        "type": "string"
+      },
+      "p_lat": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_lng": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_service": {
+        "type": "string"
+      },
+      "p_hours": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_scheduled_at": {
+        "type": "string",
+        "format": "date-time"
+      }
+    },
+    "required": [
+      "p_request_key",
+      "p_address",
+      "p_lat",
+      "p_lng",
+      "p_service",
+      "p_hours",
+      "p_scheduled_at"
+    ],
+    "additionalProperties": false
+  },
+  "set_availability": {
+    "type": "object",
+    "properties": {
+      "p_online": {
+        "type": "boolean"
+      },
+      "p_lat": {
+        "anyOf": [
+          {
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "p_lng": {
+        "anyOf": [
+          {
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "p_online"
+    ],
+    "additionalProperties": false
+  },
+  "nearby_requests": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "accept_booking": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "update_pickup_location": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_lat": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_lng": {
+        "type": "number",
+        "format": "double"
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_lat",
+      "p_lng"
+    ],
+    "additionalProperties": false
+  },
+  "pickup_driver_location": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "booking_details": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "issue_trip_otp": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "verify_trip_otp": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_code": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_code"
+    ],
+    "additionalProperties": false
+  },
+  "advance_booking": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_action": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_action"
+    ],
+    "additionalProperties": false
+  },
+  "complete_trip": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "confirm_cash": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "cancel_booking": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "expire_requests": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "submit_rating": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_score": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_review": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_score"
+    ],
+    "additionalProperties": false
+  },
+  "submit_support": {
+    "type": "object",
+    "properties": {
+      "p_subject": {
+        "type": "string"
+      },
+      "p_booking": {
+        "anyOf": [
+          {
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "p_dispute": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "p_subject"
+    ],
+    "additionalProperties": false
+  },
+  "report_emergency": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "anyOf": [
+          {
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  },
+  "request_account_deletion": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "admin_set_role": {
+    "type": "object",
+    "properties": {
+      "p_user": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_role": {
+        "type": "string"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_user",
+      "p_role",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "admin_set_status": {
+    "type": "object",
+    "properties": {
+      "p_user": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_status": {
+        "type": "string"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_user",
+      "p_status",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "register_document": {
+    "type": "object",
+    "properties": {
+      "p_driver": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_type": {
+        "type": "string"
+      },
+      "p_path": {
+        "type": "string"
+      },
+      "p_expires": {
+        "type": "string",
+        "format": "date"
+      }
+    },
+    "required": [
+      "p_driver",
+      "p_type",
+      "p_path",
+      "p_expires"
+    ],
+    "additionalProperties": false
+  },
+  "admin_review_document": {
+    "type": "object",
+    "properties": {
+      "p_document": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_status": {
+        "type": "string"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_document",
+      "p_status",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "admin_approve_driver": {
+    "type": "object",
+    "properties": {
+      "p_driver": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_driver",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "admin_update_pricing": {
+    "type": "object",
+    "properties": {
+      "p_base": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_hourly": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_minimum": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_day": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_commission": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "required": [
+      "p_base",
+      "p_hourly",
+      "p_minimum",
+      "p_day",
+      "p_commission"
+    ],
+    "additionalProperties": false
+  },
+  "admin_update_settings": {
+    "type": "object",
+    "properties": {
+      "p_radius": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_expiry": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_maintenance": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "p_radius",
+      "p_expiry",
+      "p_maintenance"
+    ],
+    "additionalProperties": false
+  },
+  "admin_resolve_ticket": {
+    "type": "object",
+    "properties": {
+      "p_ticket": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_status": {
+        "type": "string"
+      },
+      "p_note": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_ticket",
+      "p_status",
+      "p_note"
+    ],
+    "additionalProperties": false
+  },
+  "admin_overview": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "driver_wallet": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "admin_assign_driver": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_driver": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_driver",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "admin_role_permissions": {
+    "type": "object",
+    "properties": {
+      "p_role": {
+        "type": "string"
+      },
+      "p_permissions": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_role",
+      "p_permissions",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "set_notification_preference": {
+    "type": "object",
+    "properties": {
+      "p_enabled": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "p_enabled"
+    ],
+    "additionalProperties": false
+  },
+  "estimate_service_fare": {
+    "type": "object",
+    "properties": {
+      "p_service": {
+        "type": "string"
+      },
+      "p_minutes": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_km": {
+        "type": "number",
+        "format": "double"
+      }
+    },
+    "required": [
+      "p_service",
+      "p_minutes"
+    ],
+    "additionalProperties": false
+  },
+  "create_service_booking": {
+    "type": "object",
+    "properties": {
+      "p_request_key": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_address": {
+        "type": "string"
+      },
+      "p_lat": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_lng": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_service": {
+        "type": "string"
+      },
+      "p_minutes": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_scheduled_at": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "p_km": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_destination": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "p_dest_lat": {
+        "anyOf": [
+          {
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "p_dest_lng": {
+        "anyOf": [
+          {
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "p_vehicle": {
+        "anyOf": [
+          {
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "p_preference": {
+        "type": "string"
+      },
+      "p_coupon": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "p_request_key",
+      "p_address",
+      "p_lat",
+      "p_lng",
+      "p_service",
+      "p_minutes",
+      "p_scheduled_at"
+    ],
+    "additionalProperties": false
+  },
+  "start_trip": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "finish_service_trip": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_km": {
+        "anyOf": [
+          {
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "decline_request": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "admin_publish_pricing": {
+    "type": "object",
+    "properties": {
+      "p_base": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_hourly": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_minimum": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_day": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_commission": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_per_km": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_grace": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_tax": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_day_hours": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "required": [
+      "p_base",
+      "p_hourly",
+      "p_minimum",
+      "p_day",
+      "p_commission",
+      "p_per_km",
+      "p_grace",
+      "p_tax"
+    ],
+    "additionalProperties": false
+  },
+  "admin_record_commission": {
+    "type": "object",
+    "properties": {
+      "p_driver": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_amount": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_reference": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_driver",
+      "p_amount",
+      "p_reference"
+    ],
+    "additionalProperties": false
+  },
+  "admin_live_locations": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "verify_pickup_code": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_code": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_code"
+    ],
+    "additionalProperties": false
+  },
+  "register_driver": {
+    "type": "object",
+    "properties": {
+      "p_name": {
+        "type": "string"
+      },
+      "p_phone": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "p_experience": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_languages": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "p_name"
+    ],
+    "additionalProperties": false
+  },
+  "my_vehicles": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "save_vehicle": {
+    "type": "object",
+    "properties": {
+      "p_brand": {
+        "type": "string"
+      },
+      "p_model": {
+        "type": "string"
+      },
+      "p_registration": {
+        "type": "string"
+      },
+      "p_year": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_color": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_brand",
+      "p_model",
+      "p_registration",
+      "p_year"
+    ],
+    "additionalProperties": false
+  },
+  "register_vehicle_document": {
+    "type": "object",
+    "properties": {
+      "p_vehicle": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_type": {
+        "type": "string"
+      },
+      "p_path": {
+        "type": "string"
+      },
+      "p_expires": {
+        "anyOf": [
+          {
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "p_vehicle",
+      "p_type",
+      "p_path"
+    ],
+    "additionalProperties": false
+  },
+  "save_place": {
+    "type": "object",
+    "properties": {
+      "p_label": {
+        "type": "string"
+      },
+      "p_address": {
+        "type": "string"
+      },
+      "p_lat": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_lng": {
+        "type": "number",
+        "format": "double"
+      }
+    },
+    "required": [
+      "p_label",
+      "p_address",
+      "p_lat",
+      "p_lng"
+    ],
+    "additionalProperties": false
+  },
+  "my_places": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "admin_vehicle_document": {
+    "type": "object",
+    "properties": {
+      "p_document": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_status": {
+        "type": "string"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_document",
+      "p_status",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "admin_service_zone": {
+    "type": "object",
+    "properties": {
+      "p_name": {
+        "type": "string"
+      },
+      "p_lat": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_lng": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_radius": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_enabled": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "p_name",
+      "p_lat",
+      "p_lng",
+      "p_radius",
+      "p_enabled"
+    ],
+    "additionalProperties": false
+  },
+  "admin_driver_tags": {
+    "type": "object",
+    "properties": {
+      "p_driver": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_driver",
+      "p_tags",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "update_trip_location": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_lat": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_lng": {
+        "type": "number",
+        "format": "double"
+      },
+      "p_recorded_at": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "p_accuracy": {
+        "anyOf": [
+          {
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "p_heading": {
+        "anyOf": [
+          {
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "p_speed": {
+        "anyOf": [
+          {
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_lat",
+      "p_lng",
+      "p_recorded_at"
+    ],
+    "additionalProperties": false
+  },
+  "trip_tracking": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "register_push_device": {
+    "type": "object",
+    "properties": {
+      "p_token": {
+        "type": "string"
+      },
+      "p_audience": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_token",
+      "p_audience"
+    ],
+    "additionalProperties": false
+  },
+  "unregister_push_device": {
+    "type": "object",
+    "properties": {
+      "p_token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_token"
+    ],
+    "additionalProperties": false
+  },
+  "admin_push_status": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "driver_preferences": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "save_driver_preferences": {
+    "type": "object",
+    "properties": {
+      "p_notifications": {
+        "type": "boolean"
+      },
+      "p_language": {
+        "type": "string"
+      },
+      "p_emergency": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "p_notifications",
+      "p_language"
+    ],
+    "additionalProperties": false
+  },
+  "driver_requests": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "driver_history": {
+    "type": "object",
+    "properties": {
+      "p_filter": {
+        "type": "string"
+      },
+      "p_offset": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  },
+  "driver_finances": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "driver_summary": {
+    "type": "object",
+    "properties": {
+      "p_period": {
+        "type": "string"
+      }
+    },
+    "required": [],
+    "additionalProperties": false
+  },
+  "request_driver_payout": {
+    "type": "object",
+    "properties": {
+      "p_key": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_amount": {
+        "type": "integer",
+        "format": "int64"
+      }
+    },
+    "required": [
+      "p_key",
+      "p_amount"
+    ],
+    "additionalProperties": false
+  },
+  "admin_credit_driver": {
+    "type": "object",
+    "properties": {
+      "p_driver": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_amount": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_kind": {
+        "type": "string"
+      },
+      "p_reference": {
+        "type": "string"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_driver",
+      "p_amount",
+      "p_kind",
+      "p_reference",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "admin_driver_payouts": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "admin_review_payout": {
+    "type": "object",
+    "properties": {
+      "p_payout": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_status": {
+        "type": "string"
+      },
+      "p_reason": {
+        "type": "string"
+      },
+      "p_reference": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "p_payout",
+      "p_status",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "trip_chat": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "send_trip_message": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_key": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_body": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_key",
+      "p_body"
+    ],
+    "additionalProperties": false
+  },
+  "my_trip_rating": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "required": [
+      "p_booking"
+    ],
+    "additionalProperties": false
+  },
+  "admin_content": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "admin_save_content": {
+    "type": "object",
+    "properties": {
+      "p_key": {
+        "type": "string"
+      },
+      "p_title": {
+        "type": "string"
+      },
+      "p_body": {
+        "type": "string"
+      },
+      "p_published": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "p_key",
+      "p_title",
+      "p_body",
+      "p_published"
+    ],
+    "additionalProperties": false
+  },
+  "admin_enquiries": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "admin_review_enquiry": {
+    "type": "object",
+    "properties": {
+      "p_id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_status": {
+        "type": "string"
+      },
+      "p_note": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_id",
+      "p_status",
+      "p_note"
+    ],
+    "additionalProperties": false
+  },
+  "admin_driver_access": {
+    "type": "object",
+    "properties": {
+      "p_driver": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_enabled": {
+        "type": "boolean"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_driver",
+      "p_enabled",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "admin_coupons": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "admin_save_coupon": {
+    "type": "object",
+    "properties": {
+      "p_code_text": {
+        "type": "string"
+      },
+      "p_kind": {
+        "type": "string"
+      },
+      "p_value": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_cap": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_minimum": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "p_starts": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "p_ends": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "p_max": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_per_customer": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_enabled": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "p_code_text",
+      "p_kind",
+      "p_value",
+      "p_cap",
+      "p_minimum",
+      "p_starts",
+      "p_ends",
+      "p_max",
+      "p_per_customer",
+      "p_enabled"
+    ],
+    "additionalProperties": false
+  },
+  "admin_booking_commission": {
+    "type": "object",
+    "properties": {
+      "p_booking": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_bps": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_booking",
+      "p_bps",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "admin_assignable_drivers": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "admin_update_person": {
+    "type": "object",
+    "properties": {
+      "p_user": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_name": {
+        "type": "string"
+      },
+      "p_phone": {
+        "type": "string"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_user",
+      "p_name",
+      "p_phone",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  },
+  "admin_app_releases": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "admin_release_draft": {
+    "type": "object",
+    "properties": {
+      "p_audience": {
+        "type": "string"
+      },
+      "p_version": {
+        "type": "string"
+      },
+      "p_version_code": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "p_notes": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_audience",
+      "p_version",
+      "p_version_code",
+      "p_notes"
+    ],
+    "additionalProperties": false
+  },
+  "admin_retire_release": {
+    "type": "object",
+    "properties": {
+      "p_id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "p_reason": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "p_id",
+      "p_reason"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "hyzz-api",
+  "version": "1.5.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "dev": "node --env-file-if-exists=.env --watch src/server.js",
+    "test": "node --test tests/api.test.js tests/vercel.test.js tests/push.test.js tests/bank.test.js tests/client.test.js tests/operations.test.js",
+    "test:client": "node --test tests/client.test.js",
+    "check": "node --check src/server.js",
+    "seed:demo": "node --env-file-if-exists=.env scripts/seed-demo.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.57.4",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "nodemailer": "^10.2.1",
+    "yauzl": "3.4.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4"
+  }
+}

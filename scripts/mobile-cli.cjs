@@ -1,0 +1,4 @@
+const path=require('path');const fs=require('fs');const {spawn}=require('child_process');
+const [variant,command]=process.argv.slice(2);if(!['customer','driver'].includes(variant)||!['start','android'].includes(command))throw new Error('Use customer|driver and start|android');
+const root=path.resolve(__dirname,'..'),env={...process.env,HYZZ_APP_VARIANT:variant};const file=path.join(root,'frontend',variant,'.env');if(fs.existsSync(file))for(const line of fs.readFileSync(file,'utf8').split(/\r?\n/)){const m=/^(EXPO_PUBLIC_(CUSTOMER|DRIVER)_API_URL)=(.+)$/.exec(line.trim());if(m)env[m[1]]=m[3].replace(/^['"]|['"]$/g,'');}
+const cli=require.resolve('expo/bin/cli');const child=spawn(process.execPath,[cli,'start','--go','--clear',...(command==='android'?['--android']:[])],{cwd:root,env,stdio:'inherit',windowsHide:true});child.on('exit',code=>process.exit(code||0));

@@ -1,0 +1,6418 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Hyzz standalone Node API",
+    "version": "1.5.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.srtechcreators.in"
+    }
+  ],
+  "security": [
+    {
+      "userJWT": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "userJWT": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "workerSecret": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/actions/has_permission": {
+      "post": {
+        "summary": "has_permission",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_permission": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_permission"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/my_profile": {
+      "post": {
+        "summary": "my_profile",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/update_my_profile": {
+      "post": {
+        "summary": "update_my_profile",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_name": {
+                    "type": "string"
+                  },
+                  "p_phone": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "p_name"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/estimate_fare": {
+      "post": {
+        "summary": "estimate_fare",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_service": {
+                    "type": "string"
+                  },
+                  "p_hours": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                },
+                "required": [
+                  "p_service",
+                  "p_hours"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/create_booking": {
+      "post": {
+        "summary": "create_booking",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_request_key": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_address": {
+                    "type": "string"
+                  },
+                  "p_lat": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_lng": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_service": {
+                    "type": "string"
+                  },
+                  "p_hours": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_scheduled_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "p_request_key",
+                  "p_address",
+                  "p_lat",
+                  "p_lng",
+                  "p_service",
+                  "p_hours",
+                  "p_scheduled_at"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/set_availability": {
+      "post": {
+        "summary": "set_availability",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_online": {
+                    "type": "boolean"
+                  },
+                  "p_lat": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "p_lng": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "p_online"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/nearby_requests": {
+      "post": {
+        "summary": "nearby_requests",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/accept_booking": {
+      "post": {
+        "summary": "accept_booking",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/update_pickup_location": {
+      "post": {
+        "summary": "update_pickup_location",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_lat": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_lng": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_lat",
+                  "p_lng"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/pickup_driver_location": {
+      "post": {
+        "summary": "pickup_driver_location",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/booking_details": {
+      "post": {
+        "summary": "booking_details",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/issue_trip_otp": {
+      "post": {
+        "summary": "issue_trip_otp",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/verify_trip_otp": {
+      "post": {
+        "summary": "verify_trip_otp",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_code"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/advance_booking": {
+      "post": {
+        "summary": "advance_booking",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_action": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_action"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/complete_trip": {
+      "post": {
+        "summary": "complete_trip",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/confirm_cash": {
+      "post": {
+        "summary": "confirm_cash",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/cancel_booking": {
+      "post": {
+        "summary": "cancel_booking",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/expire_requests": {
+      "post": {
+        "summary": "expire_requests",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/submit_rating": {
+      "post": {
+        "summary": "submit_rating",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_score": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_review": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_score"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/submit_support": {
+      "post": {
+        "summary": "submit_support",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_subject": {
+                    "type": "string"
+                  },
+                  "p_booking": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "p_dispute": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "p_subject"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/report_emergency": {
+      "post": {
+        "summary": "report_emergency",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/request_account_deletion": {
+      "post": {
+        "summary": "request_account_deletion",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_set_role": {
+      "post": {
+        "summary": "admin_set_role",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_user": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_role": {
+                    "type": "string"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_user",
+                  "p_role",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_set_status": {
+      "post": {
+        "summary": "admin_set_status",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_user": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_status": {
+                    "type": "string"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_user",
+                  "p_status",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/register_document": {
+      "post": {
+        "summary": "register_document",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_driver": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_type": {
+                    "type": "string"
+                  },
+                  "p_path": {
+                    "type": "string"
+                  },
+                  "p_expires": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                },
+                "required": [
+                  "p_driver",
+                  "p_type",
+                  "p_path",
+                  "p_expires"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_review_document": {
+      "post": {
+        "summary": "admin_review_document",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_document": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_status": {
+                    "type": "string"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_document",
+                  "p_status",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_approve_driver": {
+      "post": {
+        "summary": "admin_approve_driver",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_driver": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_driver",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_update_pricing": {
+      "post": {
+        "summary": "admin_update_pricing",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_base": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_hourly": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_minimum": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_day": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_commission": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                },
+                "required": [
+                  "p_base",
+                  "p_hourly",
+                  "p_minimum",
+                  "p_day",
+                  "p_commission"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_update_settings": {
+      "post": {
+        "summary": "admin_update_settings",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_radius": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_expiry": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_maintenance": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "p_radius",
+                  "p_expiry",
+                  "p_maintenance"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_resolve_ticket": {
+      "post": {
+        "summary": "admin_resolve_ticket",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_ticket": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_status": {
+                    "type": "string"
+                  },
+                  "p_note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_ticket",
+                  "p_status",
+                  "p_note"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_overview": {
+      "post": {
+        "summary": "admin_overview",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/driver_wallet": {
+      "post": {
+        "summary": "driver_wallet",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_assign_driver": {
+      "post": {
+        "summary": "admin_assign_driver",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_driver": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_driver",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_role_permissions": {
+      "post": {
+        "summary": "admin_role_permissions",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_role": {
+                    "type": "string"
+                  },
+                  "p_permissions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_role",
+                  "p_permissions",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/set_notification_preference": {
+      "post": {
+        "summary": "set_notification_preference",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_enabled": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "p_enabled"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/estimate_service_fare": {
+      "post": {
+        "summary": "estimate_service_fare",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_service": {
+                    "type": "string"
+                  },
+                  "p_minutes": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_km": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": [
+                  "p_service",
+                  "p_minutes"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/create_service_booking": {
+      "post": {
+        "summary": "create_service_booking",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_request_key": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_address": {
+                    "type": "string"
+                  },
+                  "p_lat": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_lng": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_service": {
+                    "type": "string"
+                  },
+                  "p_minutes": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_scheduled_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "p_km": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_destination": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "p_dest_lat": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "p_dest_lng": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "p_vehicle": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "p_preference": {
+                    "type": "string"
+                  },
+                  "p_coupon": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "p_request_key",
+                  "p_address",
+                  "p_lat",
+                  "p_lng",
+                  "p_service",
+                  "p_minutes",
+                  "p_scheduled_at"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/start_trip": {
+      "post": {
+        "summary": "start_trip",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/finish_service_trip": {
+      "post": {
+        "summary": "finish_service_trip",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_km": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/decline_request": {
+      "post": {
+        "summary": "decline_request",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_publish_pricing": {
+      "post": {
+        "summary": "admin_publish_pricing",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_base": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_hourly": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_minimum": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_day": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_commission": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_per_km": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_grace": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_tax": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_day_hours": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                },
+                "required": [
+                  "p_base",
+                  "p_hourly",
+                  "p_minimum",
+                  "p_day",
+                  "p_commission",
+                  "p_per_km",
+                  "p_grace",
+                  "p_tax"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_record_commission": {
+      "post": {
+        "summary": "admin_record_commission",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_driver": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_amount": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_reference": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_driver",
+                  "p_amount",
+                  "p_reference"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_live_locations": {
+      "post": {
+        "summary": "admin_live_locations",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/verify_pickup_code": {
+      "post": {
+        "summary": "verify_pickup_code",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_code": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_code"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/register_driver": {
+      "post": {
+        "summary": "register_driver",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_name": {
+                    "type": "string"
+                  },
+                  "p_phone": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "p_experience": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_languages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "p_name"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/my_vehicles": {
+      "post": {
+        "summary": "my_vehicles",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/save_vehicle": {
+      "post": {
+        "summary": "save_vehicle",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_brand": {
+                    "type": "string"
+                  },
+                  "p_model": {
+                    "type": "string"
+                  },
+                  "p_registration": {
+                    "type": "string"
+                  },
+                  "p_year": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_color": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_brand",
+                  "p_model",
+                  "p_registration",
+                  "p_year"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/register_vehicle_document": {
+      "post": {
+        "summary": "register_vehicle_document",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_vehicle": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_type": {
+                    "type": "string"
+                  },
+                  "p_path": {
+                    "type": "string"
+                  },
+                  "p_expires": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "p_vehicle",
+                  "p_type",
+                  "p_path"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/save_place": {
+      "post": {
+        "summary": "save_place",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_label": {
+                    "type": "string"
+                  },
+                  "p_address": {
+                    "type": "string"
+                  },
+                  "p_lat": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_lng": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "required": [
+                  "p_label",
+                  "p_address",
+                  "p_lat",
+                  "p_lng"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/my_places": {
+      "post": {
+        "summary": "my_places",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_vehicle_document": {
+      "post": {
+        "summary": "admin_vehicle_document",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_document": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_status": {
+                    "type": "string"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_document",
+                  "p_status",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_service_zone": {
+      "post": {
+        "summary": "admin_service_zone",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_name": {
+                    "type": "string"
+                  },
+                  "p_lat": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_lng": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_radius": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_enabled": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "p_name",
+                  "p_lat",
+                  "p_lng",
+                  "p_radius",
+                  "p_enabled"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_driver_tags": {
+      "post": {
+        "summary": "admin_driver_tags",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_driver": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_driver",
+                  "p_tags",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/update_trip_location": {
+      "post": {
+        "summary": "update_trip_location",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_lat": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_lng": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "p_recorded_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "p_accuracy": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "p_heading": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "p_speed": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_lat",
+                  "p_lng",
+                  "p_recorded_at"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/trip_tracking": {
+      "post": {
+        "summary": "trip_tracking",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/register_push_device": {
+      "post": {
+        "summary": "register_push_device",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_token": {
+                    "type": "string"
+                  },
+                  "p_audience": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_token",
+                  "p_audience"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/unregister_push_device": {
+      "post": {
+        "summary": "unregister_push_device",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_token": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_token"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_push_status": {
+      "post": {
+        "summary": "admin_push_status",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/driver_preferences": {
+      "post": {
+        "summary": "driver_preferences",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/save_driver_preferences": {
+      "post": {
+        "summary": "save_driver_preferences",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_notifications": {
+                    "type": "boolean"
+                  },
+                  "p_language": {
+                    "type": "string"
+                  },
+                  "p_emergency": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "p_notifications",
+                  "p_language"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/driver_requests": {
+      "post": {
+        "summary": "driver_requests",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/driver_history": {
+      "post": {
+        "summary": "driver_history",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_filter": {
+                    "type": "string"
+                  },
+                  "p_offset": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                },
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/driver_finances": {
+      "post": {
+        "summary": "driver_finances",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/driver_summary": {
+      "post": {
+        "summary": "driver_summary",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_period": {
+                    "type": "string"
+                  }
+                },
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/request_driver_payout": {
+      "post": {
+        "summary": "request_driver_payout",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_key": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_amount": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "required": [
+                  "p_key",
+                  "p_amount"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_credit_driver": {
+      "post": {
+        "summary": "admin_credit_driver",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_driver": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_amount": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_kind": {
+                    "type": "string"
+                  },
+                  "p_reference": {
+                    "type": "string"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_driver",
+                  "p_amount",
+                  "p_kind",
+                  "p_reference",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_driver_payouts": {
+      "post": {
+        "summary": "admin_driver_payouts",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_review_payout": {
+      "post": {
+        "summary": "admin_review_payout",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_payout": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_status": {
+                    "type": "string"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  },
+                  "p_reference": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "p_payout",
+                  "p_status",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/trip_chat": {
+      "post": {
+        "summary": "trip_chat",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/send_trip_message": {
+      "post": {
+        "summary": "send_trip_message",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_key": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_body": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_key",
+                  "p_body"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/my_trip_rating": {
+      "post": {
+        "summary": "my_trip_rating",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "p_booking"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_content": {
+      "post": {
+        "summary": "admin_content",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_save_content": {
+      "post": {
+        "summary": "admin_save_content",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_key": {
+                    "type": "string"
+                  },
+                  "p_title": {
+                    "type": "string"
+                  },
+                  "p_body": {
+                    "type": "string"
+                  },
+                  "p_published": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "p_key",
+                  "p_title",
+                  "p_body",
+                  "p_published"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_enquiries": {
+      "post": {
+        "summary": "admin_enquiries",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_review_enquiry": {
+      "post": {
+        "summary": "admin_review_enquiry",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_status": {
+                    "type": "string"
+                  },
+                  "p_note": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_id",
+                  "p_status",
+                  "p_note"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_driver_access": {
+      "post": {
+        "summary": "admin_driver_access",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_driver": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_enabled": {
+                    "type": "boolean"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_driver",
+                  "p_enabled",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_coupons": {
+      "post": {
+        "summary": "admin_coupons",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_save_coupon": {
+      "post": {
+        "summary": "admin_save_coupon",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_code_text": {
+                    "type": "string"
+                  },
+                  "p_kind": {
+                    "type": "string"
+                  },
+                  "p_value": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_cap": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_minimum": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "p_starts": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "p_ends": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "p_max": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_per_customer": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_enabled": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "p_code_text",
+                  "p_kind",
+                  "p_value",
+                  "p_cap",
+                  "p_minimum",
+                  "p_starts",
+                  "p_ends",
+                  "p_max",
+                  "p_per_customer",
+                  "p_enabled"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_booking_commission": {
+      "post": {
+        "summary": "admin_booking_commission",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_booking": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_bps": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_booking",
+                  "p_bps",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_assignable_drivers": {
+      "post": {
+        "summary": "admin_assignable_drivers",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_update_person": {
+      "post": {
+        "summary": "admin_update_person",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_user": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_name": {
+                    "type": "string"
+                  },
+                  "p_phone": {
+                    "type": "string"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_user",
+                  "p_name",
+                  "p_phone",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_app_releases": {
+      "post": {
+        "summary": "admin_app_releases",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_release_draft": {
+      "post": {
+        "summary": "admin_release_draft",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_audience": {
+                    "type": "string"
+                  },
+                  "p_version": {
+                    "type": "string"
+                  },
+                  "p_version_code": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "p_notes": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_audience",
+                  "p_version",
+                  "p_version_code",
+                  "p_notes"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/actions/admin_retire_release": {
+      "post": {
+        "summary": "admin_retire_release",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "p_id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "p_reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p_id",
+                  "p_reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/otp": {
+      "post": {
+        "summary": "Send email OTP",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "create_user": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/auth/verify": {
+      "post": {
+        "summary": "Verify email OTP",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "token",
+                  "type"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "token": {
+                    "type": "string",
+                    "pattern": "^[0-9]{6,10}$"
+                  },
+                  "type": {
+                    "const": "email"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/auth/token": {
+      "post": {
+        "summary": "Refresh session (grant_type=refresh_token query required)",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "refresh_token"
+                ],
+                "properties": {
+                  "refresh_token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/auth/user": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Authenticated user"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "summary": "Sign out; scope query supports local/global/others",
+        "responses": {
+          "204": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/admin/accounts": {
+      "post": {
+        "summary": "Create a driver/employee with server credentials",
+        "responses": {
+          "201": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "name",
+                  "kind"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 100
+                  },
+                  "kind": {
+                    "enum": [
+                      "driver",
+                      "employee",
+                      "customer"
+                    ]
+                  },
+                  "role": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/bookings": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/support_tickets": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/driver_documents": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/financial_ledger_entries": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/notification_records": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/pricing_rules": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/system_settings": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/roles": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/role_permissions": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/account_deletion_requests": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/service_areas": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/customer_vehicles": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/data/vehicle_documents": {
+      "get": {
+        "summary": "Bounded RLS-protected read",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "select",
+            "schema": {
+              "type": "string",
+              "default": "*"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "default": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "maximum": 100000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorized rows"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/documents/sign/{path}": {
+      "post": {
+        "summary": "Get a private viewing URL",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "expiresIn"
+                ],
+                "properties": {
+                  "expiresIn": {
+                    "const": 60
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path",
+            "required": true,
+            "description": "driver UUID / filename, encode each path segment",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/documents/upload/{path}": {
+      "post": {
+        "summary": "Upload private PDF/PNG/JPEG, max 4 MiB",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path",
+            "required": true,
+            "description": "driver UUID / filename, encode each path segment",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Node process liveness; not hosted provider readiness"
+          }
+        }
+      }
+    },
+    "/api/v1/capabilities": {
+      "get": {
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Provider feature flags; tracking enabled"
+          }
+        }
+      }
+    },
+    "/api/v1/maps/route": {
+      "post": {
+        "summary": "Road route with explicit unavailable fallback",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "from",
+                  "to"
+                ],
+                "properties": {
+                  "from": {
+                    "type": "object"
+                  },
+                  "to": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/vehicles/sign/{path}": {
+      "post": {
+        "summary": "Get a private viewing URL",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "expiresIn"
+                ],
+                "properties": {
+                  "expiresIn": {
+                    "const": 60
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path",
+            "required": true,
+            "description": "driver UUID / filename, encode each path segment",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/documents/vehicles/upload/{path}": {
+      "post": {
+        "summary": "Upload private PDF/PNG/JPEG, max 4 MiB",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path",
+            "required": true,
+            "description": "driver UUID / filename, encode each path segment",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/authorize": {
+      "get": {
+        "security": [],
+        "summary": "Optional Google PKCE redirect; provider, redirect_to, code_challenge, code_challenge_method=s256 required",
+        "responses": {
+          "302": {
+            "description": "Configured Supabase Google authorization"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/internal/push": {
+      "get": {
+        "summary": "Server scheduler only; CRON_SECRET bearer authentication, never a user session",
+        "security": [
+          {
+            "workerSecret": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notification batch processing summary"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/bank/details": {
+      "post": {
+        "summary": "Driver-only encrypted bank update; returns masked account suffix",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "name",
+                  "account",
+                  "ifsc"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 100
+                  },
+                  "account": {
+                    "type": "string",
+                    "pattern": "^[0-9]{9,18}$"
+                  },
+                  "ifsc": {
+                    "type": "string",
+                    "pattern": "^[A-Z]{4}0[A-Z0-9]{6}$"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank/payout/{id}/reveal": {
+      "post": {
+        "summary": "Finance.manage only; audited reveal of payout bank snapshot",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/public/content": {
+      "get": {
+        "security": [],
+        "summary": "Published public content or APK metadata/download; draft releases remain private",
+        "responses": {
+          "200": {
+            "description": "Published data"
+          },
+          "302": {
+            "description": "Short-lived APK download redirect"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/releases/latest/{audience}": {
+      "get": {
+        "security": [],
+        "summary": "Published public content or APK metadata/download; draft releases remain private",
+        "responses": {
+          "200": {
+            "description": "Published data"
+          },
+          "302": {
+            "description": "Short-lived APK download redirect"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "audience",
+            "required": true,
+            "schema": {
+              "enum": [
+                "customer",
+                "driver"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/releases/{id}/download": {
+      "get": {
+        "security": [],
+        "summary": "Published public content or APK metadata/download; draft releases remain private",
+        "responses": {
+          "200": {
+            "description": "Published data"
+          },
+          "302": {
+            "description": "Short-lived APK download redirect"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/public/contact": {
+      "post": {
+        "summary": "Rate-limited consented contact enquiry",
+        "responses": {
+          "201": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "topic",
+                  "message",
+                  "consent"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "phone": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "topic": {
+                    "enum": [
+                      "customer",
+                      "driver",
+                      "business",
+                      "support"
+                    ]
+                  },
+                  "message": {
+                    "type": "string",
+                    "minLength": 10,
+                    "maxLength": 2000
+                  },
+                  "consent": {
+                    "const": true
+                  },
+                  "website": {
+                    "const": ""
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/v1/admin/releases/upload": {
+      "post": {
+        "summary": "Release permission: draft and private signed direct-upload capability",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "audience",
+                  "version",
+                  "version_code",
+                  "notes"
+                ],
+                "properties": {
+                  "audience": {
+                    "enum": [
+                      "driver",
+                      "customer"
+                    ]
+                  },
+                  "version": {
+                    "type": "string"
+                  },
+                  "version_code": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "notes": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 2000
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/releases/{id}/publish": {
+      "post": {
+        "summary": "Release permission: inspect uploaded APK, hash bytes, publish and queue notices",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "signature_checked": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "signature_checked"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/releases/notify": {
+      "post": {
+        "summary": "Release permission: process next announcement batch",
+        "responses": {
+          "200": {
+            "description": "Operation result; inspect ok for OTP verification"
+          },
+          "400": {
+            "description": "Validation/business rejection"
+          },
+          "401": {
+            "description": "Invalid session"
+          },
+          "403": {
+            "description": "Permission/account rejected"
+          },
+          "413": {
+            "description": "Body/upload too large"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Missing configuration or provider unavailable"
+          }
+        }
+      }
+    }
+  }
+}

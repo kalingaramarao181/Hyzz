@@ -1,0 +1,6 @@
+-- Run migrations first. Create three dedicated Auth identities with the seed script.
+-- This script intentionally does not invent login passwords or verified inboxes.
+-- After backend/scripts/seed-demo.js has created tagged accounts, the server-only
+-- helper api_seed_demo creates the demo roles, approved fictional documents,
+-- pricing, completed cash trip, fare, ledger, review and audit record idempotently.
+-- See docs/VERCEL-TESTING.md and backend/.env.example.

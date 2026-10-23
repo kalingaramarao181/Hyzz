@@ -1,0 +1,11 @@
+**/node_modules
+android
+build
+dist*
+**/dist
+.expo
+.git
+*.log
+.env*
+**/*.apk
+**/*.keystore

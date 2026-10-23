@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hyzz – Interactive Demo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2316302b'/%3E%3Cpath d='M20 16v32M44 20v28M20 34h24' stroke='%23fff' stroke-width='7' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='46' cy='13' r='7' fill='%23ff6b35'/%3E%3C/svg%3E">
+<style>
+:root{--pg:#f4f7f6;--tx:#16302b;--mu:#5d7770;--ln:#c9d9d3;--cd:#fff;--ac:#ff6b35}
+@media(prefers-color-scheme:dark){:root{--pg:#0f1f1c;--tx:#e9f0ed;--mu:#9bb5ad;--ln:#2a4a43;--cd:#16302b}}
+*{box-sizing:border-box}body{margin:0;background:var(--pg);color:var(--tx);font:15px/1.5 "Segoe UI",system-ui,sans-serif;padding:16px}
+.wrap{max-width:1180px;margin:0 auto}
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px}.wm{font:800 30px/1 "Segoe UI",system-ui,sans-serif;letter-spacing:-1.5px}.tag{color:var(--mu);font-size:13px}
+.sw{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.pill{border:1px solid var(--ln);background:var(--cd);color:var(--tx);border-radius:999px;padding:6px 14px;cursor:pointer;font:inherit;font-size:14px}
+.pill:hover{border-color:var(--tx)}.pill.on{background:var(--tx);color:var(--pg);border-color:var(--tx)}.pill.lk{opacity:.5}
+select.pill{padding:6px 10px}
+.mu{color:var(--mu)}
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:20px;justify-items:center;margin-top:12px}
+.col{width:100%;max-width:350px}.cap{text-align:center;color:var(--mu);font-size:13px;margin-top:8px}
+.ph{background:#16302b;border-radius:34px;padding:10px}
+.sc{background:#eef3f1;border-radius:26px;height:620px;overflow-y:auto;padding:16px 14px;color:#16302b;font-size:14px}
+.sc *{color:inherit}
+.ttl{display:flex;align-items:center;gap:8px;font:800 22px system-ui;margin:0 0 10px;letter-spacing:-1px}
+.h{font-weight:600;font-size:15px;margin:10px 0 6px}
+.in,.sc select{width:100%;border:1px solid #c9d9d3;background:#fff;border-radius:10px;padding:9px;margin:4px 0;font:inherit;color:#16302b}
+.b{display:block;width:100%;background:#ff6b35;color:#fff!important;border:0;border-radius:999px;padding:10px;font:600 14px system-ui;margin:6px 0;cursor:pointer}
+.b:hover{filter:brightness(1.08)}.o{background:transparent;border:1px solid #16302b;color:#16302b!important}
+.card{background:#fff;border-radius:14px;padding:11px;margin:8px 0}
+.chip{display:inline-block;background:#16302b;color:#fff!important;border-radius:999px;padding:2px 10px;font-size:12px}
+.otp{font:700 28px ui-monospace,monospace;letter-spacing:6px;color:#ff6b35!important;text-align:center;margin:6px 0}
+.m2{color:#5d7770!important;font-size:12px}.err{color:#b3261e!important;font-size:13px;min-height:16px}
+.row{display:flex;justify-content:space-between;gap:8px}.tot{font-weight:700;font-size:16px}
+.st{font-size:26px;cursor:pointer;color:#c9d9d3!important}.st.on{color:#ff6b35!important}
+.chips{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}.chips span{border:1px solid #c9d9d3;background:#fff;border-radius:999px;padding:3px 9px;font-size:12px;cursor:pointer}
+.panel{background:var(--cd);border:1px solid var(--ln);border-radius:16px;padding:16px;margin-top:14px}
+.panel h2{font:600 1.1rem Georgia,serif;margin:0 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.met{background:var(--pg);border-radius:10px;padding:10px 12px}.met b{font-size:22px;display:block}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;padding:6px;border-top:1px solid var(--ln);vertical-align:middle}
+.tw{overflow-x:auto}
+.lg{font-size:13px;max-height:230px;overflow-y:auto}.lg div{padding:3px 0;border-top:1px solid var(--ln)}
+.bt{border:1px solid var(--ln);background:var(--cd);color:var(--tx);border-radius:8px;padding:3px 9px;cursor:pointer;font:inherit;font-size:12px;margin:1px}
+.bt:hover{border-color:var(--tx)}.bt.d{color:#b3261e}
+.tg{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;background:var(--pg);border:1px solid var(--ln)}
+.tg.g{background:#e3f4ea;color:#14532d;border-color:#9fd6b4}.tg.r{background:#fde8e6;color:#8a1c14;border-color:#f0a8a2}.tg.y{background:#fff3d6;color:#7a4b00;border-color:#efcf8a}
+.f{display:flex;gap:8px;flex-wrap:wrap;align-items:end;margin:8px 0}.f label{font-size:12px;color:var(--mu);display:block}
+.f input,.f select{border:1px solid var(--ln);background:var(--cd);color:var(--tx);border-radius:8px;padding:7px 9px;font:inherit;width:130px}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--tx);color:var(--pg);padding:10px 18px;border-radius:999px;opacity:0;transition:opacity .25s;pointer-events:none;max-width:90vw;z-index:9}
+#toast.s{opacity:1}
+.note{font-size:13px;color:var(--mu);margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><span id="logoH"></span><div><div class="wm">hyzz</div><div class="tag">Your car. A trusted driver.</div></div></div>
+  <div class="sw">
+    <button class="pill on" id="vD" onclick="view('demo')">Customer and driver apps</button>
+    <button class="pill" id="vA" onclick="view('admin')">Admin dashboard</button>
+    <span id="actW" style="display:none"><span class="mu" style="font-size:13px">Acting as</span> <select class="pill" id="act" onchange="S.actor=+this.value;S.tab='dashboard';render()"></select></span>
+  </div>
+</header>
+
+<section id="demo">
+  <div class="sw" style="margin:0 0 4px">
+    <button class="pill" onclick="ff(15)">Fast-forward trip 15 min</button>
+    <button class="pill" onclick="ff(60)">Fast-forward trip 60 min</button>
+    <button class="pill" onclick="reset()">Reset demo</button><span class="mu" id="clk" style="font-size:13px"></span>
+  </div>
+  <div class="phones">
+    <div class="col"><div class="ph"><div class="sc" id="cust"></div></div><div class="cap">Customer phone</div></div>
+    <div class="col"><div class="ph"><div class="sc" id="drv"></div></div><div class="cap">Driver phone</div></div>
+  </div>
+  <div class="two"><div class="panel"><h2>Booking timeline</h2><div class="lg" id="log"></div></div>
+  <div class="panel"><h2>Try this</h2><div class="lg mu" style="max-height:none">1. Driver phone: Go online. 2. Customer phone: sign in, tap the map to move the pickup pin, confirm. 3. Driver accepts and you will see the driver car move on both maps. 4. Driver arrives, customer shows the code, driver verifies it. 5. Fast-forward, end the trip, then settle cash. 6. Open the Admin dashboard to see the booking, ledger and commission. Admin can suspend the driver or change pricing and it changes the apps immediately.</div></div></div>
+</section>
+
+<section id="admin" style="display:none"><div id="adm"></div></section>
+<p class="note">Simulation in your browser. Nothing is sent anywhere. The map is a schematic of a demo city so it works offline. The "Navigate" button opens real Google Maps. A live product would use a maps provider key (Google Maps, Mapbox or OpenStreetMap).</p>
+</div>
+<div id="toast" role="status"></div>
+<script>
+const $=id=>document.getElementById(id),rs=p=>'₹'+(p/100).toFixed(2),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LOGO=s=>`<svg width="${s}" height="${s}" viewBox="0 0 64 64" role="img" aria-label="Hyzz logo"><rect width="64" height="64" rx="16" fill="#16302b"/><path d="M20 16v32M44 20v28M20 34h24" stroke="#fff" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="46" cy="13" r="7" fill="#ff6b35"/><circle cx="46" cy="13" r="2.5" fill="#16302b"/></svg>`;
+$('logoH').innerHTML=LOGO(46);
+const sum=L=>L.reduce((a,l)=>a+l[1],0),pc=(a,b)=>Math.round(a*b/10000);
+const T={REQUESTED:['MATCHING','CANCELLED_BY_CUSTOMER'],MATCHING:['DRIVER_ASSIGNED','NO_DRIVER_AVAILABLE','CANCELLED_BY_CUSTOMER','CANCELLED_BY_ADMIN'],DRIVER_ASSIGNED:['DRIVER_EN_ROUTE','CANCELLED_BY_CUSTOMER','CANCELLED_BY_DRIVER','CANCELLED_BY_ADMIN'],DRIVER_EN_ROUTE:['DRIVER_ARRIVED','CANCELLED_BY_CUSTOMER','CANCELLED_BY_DRIVER','CANCELLED_BY_ADMIN'],DRIVER_ARRIVED:['OTP_VERIFIED','CANCELLED_BY_CUSTOMER','CANCELLED_BY_DRIVER','CANCELLED_BY_ADMIN'],OTP_VERIFIED:['IN_PROGRESS','CANCELLED_BY_ADMIN'],IN_PROGRESS:['COMPLETED'],COMPLETED:['PAYMENT_PENDING'],PAYMENT_PENDING:['PAYMENT_SETTLED','DISPUTED']};
+function fare(t,m,km,r){let L=[];
+ if(t==='hourly'){L.push(['Base fare',r.base],['Time (first 60 min)',r.hr]);const u=Math.ceil(Math.max(0,m-60-r.grace)/15);if(u)L.push(['Overtime ('+u+' × 15 min)',u*Math.round(r.hr*15/60)])}
+ else if(t==='distance'){L.push(['Base fare',r.base],['Distance ('+km+' km)',Math.round(r.dist*km)]);if(sum(L)<15000)L.push(['Minimum fare adjustment',15000-sum(L)])}
+ else{L.push(['Full-day package (10 hours)',r.day]);const u=Math.ceil(Math.max(0,m-610)/30);if(u)L.push(['Overtime ('+u+' × 30 min)',u*8000])}
+ const s=sum(L),tax=pc(s,r.gst),c=pc(s,r.comm);return{lines:L,sub:s,tax,total:s+tax,comm:c,earn:s-c,ver:r.ver}}
+// ---- map ----
+const LAT0=16.28,LAT1=16.33,LNG0=80.41,LNG1=80.47;
+const POI=[{n:'Railway Station',lat:16.3010,lng:80.4390},{n:'Central Market',lat:16.3120,lng:80.4300},{n:'City Hospital',lat:16.3200,lng:80.4520},{n:'Lake Park',lat:16.2900,lng:80.4200}];
+const xy=(lat,lng)=>[(lng-LNG0)/(LNG1-LNG0)*300,(LAT1-lat)/(LAT1-LAT0)*190];
+const hav=(a,b)=>{const r=x=>x*Math.PI/180,x=Math.sin(r(b.lat-a.lat)/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(r(b.lng-a.lng)/2)**2;return 12742*Math.asin(Math.sqrt(x))};
+const pin=(p,c)=>{const[x,y]=xy(p.lat,p.lng);return`<g transform="translate(${x},${y})"><path d="M0 0C-7-9-8-12-8-15a8 8 0 0 1 16 0c0 3-1 6-8 15z" fill="${c}"/><circle cy="-15" r="3" fill="#fff"/></g>`};
+const car=(p,c)=>{const[x,y]=xy(p.lat,p.lng);return`<g transform="translate(${x},${y})"><circle r="8" fill="${c}" stroke="#fff" stroke-width="2"/><path d="M-4 1v-3l1.5-2.5h5L5-2v3zM-3 3h2M1 3h2" stroke="#fff" stroke-width="1.3" fill="none"/></g>`};
+function mapSVG(k){const b=S.cur,p=b?b.pickup:S.pickup,d=S.drv[0],click=k==='c'&&!b;
+ let s=`<svg viewBox="0 0 300 190" style="width:100%;border-radius:14px;display:block;${click?'cursor:crosshair':''}" ${click?'onclick="mapPick(event)"':''} role="img" aria-label="Map"><rect width="300" height="190" fill="#e4eee8"/><path d="M0 158Q80 138 140 168T300 172V190H0Z" fill="#b9d6ea"/><rect x="30" y="128" width="46" height="26" rx="6" fill="#cfe5c4"/><g stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M0 95L300 78"/><path d="M150 0L140 190"/><path d="M0 38L300 150"/><path d="M62 0L92 190"/><path d="M222 0L252 190"/></g><g stroke="#cfd9d4" stroke-width=".8" fill="none"><path d="M0 95L300 78"/><path d="M150 0L140 190"/></g>`;
+ POI.forEach(o=>{const[x,y]=xy(o.lat,o.lng);s+=`<circle cx="${x}" cy="${y}" r="3" fill="#16302b" opacity=".55"/><text x="${x+5}" y="${y+3}" font-size="8" fill="#16302b" opacity=".75">${o.n}</text>`});
+ const showD=k==='a'?d.online:k==='d'?d.online:(b&&['DRIVER_ASSIGNED','DRIVER_EN_ROUTE','DRIVER_ARRIVED'].includes(b.status));
+ if(k==='a')S.drv.slice(1).filter(x=>x.online).forEach(x=>s+=car(x.pos,'#5d7770'));
+ if(p&&!(k==='a'&&!b))s+=pin(p,'#e53935');
+ if(b&&showD&&['DRIVER_ASSIGNED','DRIVER_EN_ROUTE'].includes(b.status)){const[a1,a2]=xy(d.pos.lat,d.pos.lng),[c1,c2]=xy(p.lat,p.lng);s+=`<path d="M${a1} ${a2}L${c1} ${c2}" stroke="#ff6b35" stroke-width="2.5" stroke-dasharray="5 4" fill="none"/>`}
+ if(showD)s+=car(d.pos,'#ff6b35');
+ return s+'</svg>'}
+function mapPick(e){const r=e.currentTarget.getBoundingClientRect(),fx=(e.clientX-r.left)/r.width,fy=(e.clientY-r.top)/r.height;
+ S.pickup={n:'Dropped pin',lat:+(LAT1-fy*(LAT1-LAT0)).toFixed(5),lng:+(LNG0+fx*(LNG1-LNG0)).toFixed(5)};S.c.est=null;render()}
+function updMaps(){document.querySelectorAll('[data-m]').forEach(e=>e.innerHTML=mapSVG(e.dataset.m))}
+const mapBox=k=>`<div data-m="${k}">${mapSVG(k)}</div>`;
+setInterval(()=>{const b=S.cur,d=S.drv[0];if(b&&['DRIVER_ASSIGNED','DRIVER_EN_ROUTE'].includes(b.status)){const dk=hav(d.pos,b.pickup);if(dk>.03){d.pos={lat:d.pos.lat+(b.pickup.lat-d.pos.lat)*.12,lng:d.pos.lng+(b.pickup.lng-d.pos.lng)*.12};updMaps();const e=$('eta');if(e)e.textContent=dk.toFixed(1)+' km · about '+Math.max(1,Math.round(dk/25*60))+' min'}}
+ const r=$('run');if(r&&b&&b.status==='IN_PROGRESS')r.textContent=fmt(runMin(b))},800);
+// ---- state ----
+const ROLES={'Super Admin':['dashboard','bookings','bookings:w','drivers','drivers:w','customers','customers:w','pricing','pricing:w','finance','finance:w','employees','employees:w','audit'],
+'Operations Manager':['dashboard','bookings','bookings:w','drivers','customers','customers:w'],'Driver Verification Officer':['dashboard','drivers','drivers:w'],
+'Customer Support Agent':['dashboard','bookings','customers','customers:w'],'Finance Officer':['dashboard','finance','finance:w'],'Reporting Analyst':['dashboard','bookings','finance']};
+const TABS=['dashboard','bookings','drivers','customers','pricing','finance','employees','audit'];
+const init=(v)=>({view:v||'demo',tab:'dashboard',actor:0,sel:null,filter:'all',
+ rules:{ver:1,hr:20000,base:5000,dist:1800,day:160000,grace:5,gst:1800,comm:1500},rlog:[{ver:1,by:'System'}],
+ drv:[{name:'Ravi K.',phone:'9100000001',docs:'approved',approved:1,status:'active',online:0,exp:Date.now()+400*864e5,pos:{lat:16.3,lng:80.452}},
+  {name:'Suresh M.',phone:'9100000002',docs:'pending',approved:0,status:'active',online:0,exp:Date.now()+300*864e5,pos:{lat:16.31,lng:80.42}},
+  {name:'Anil P.',phone:'9100000003',docs:'approved',approved:1,status:'active',online:1,exp:Date.now()+9*864e5,pos:{lat:16.295,lng:80.435}}],
+ cust:[{phone:'9000000001',name:'Anita R.',status:'active'},{phone:'9000000002',name:'Kiran S.',status:'active'}],
+ emp:[{name:'Root Admin',role:'Super Admin'},{name:'Meera (Ops)',role:'Operations Manager'},{name:'Vikram (Verification)',role:'Driver Verification Officer'},{name:'Divya (Finance)',role:'Finance Officer'},{name:'Arjun (Analyst)',role:'Reporting Analyst'}],
+ pickup:{n:'Railway Station',lat:16.301,lng:80.439},bks:[],cur:null,led:[],log:[],audit:[],
+ c:{auth:0,phone:'',sent:'',code:'',entered:'',type:'hourly',min:60,km:10,est:null,err:'',rating:0,me:null},d:{err:'',code:'',km:10}});
+let S=init(),offset=0;const now=()=>Date.now()+offset;
+const tm=()=>new Date(now()).toLocaleTimeString();
+const log=m=>S.log.unshift(tm()+'  '+m);
+const fmt=m=>Math.floor(m)+' min '+String(Math.floor((m%1)*60)).padStart(2,'0')+' s';
+const runMin=b=>((b.endedAt||now())-b.startedAt)/60000;
+function go(b,to,who){if(!(T[b.status]||[]).includes(to))return false;const l=who+': '+b.status+' → '+to;b.hist.push(tm()+'  '+l);log(b.ref+' '+l);b.status=to;return true}
+function toast(m){const t=$('toast');t.textContent=m;t.className='s';clearTimeout(toast.t);toast.t=setTimeout(()=>t.className='',2600)}
+function ff(m){offset+=m*60000;log('Server clock moved forward '+m+' min (demo control)');render()}
+function reset(){S=init(S.view);offset=0;render()}
+function view(v){S.view=v;render()}
+// ---- customer ----
+const me=()=>S.cust.find(x=>x.phone===S.c.me);
+const C={
+ send(){const p=S.c.phone.trim();if(!/^\d{10}$/.test(p)){S.c.err='Enter a 10-digit mobile number.';return render()}S.c.err='';S.c.code=String(Math.floor(1e5+Math.random()*9e5));S.c.sent=1;render()},
+ verify(){if(S.c.entered!==S.c.code){S.c.err='That code is incorrect or expired.';return render()}let u=S.cust.find(x=>x.phone===S.c.phone.trim());if(!u){u={phone:S.c.phone.trim(),name:'Customer '+S.c.phone.slice(-4),status:'active'};S.cust.push(u)}
+  if(u.status!=='active'){S.c.err='Your account is suspended. Contact support.';return render()}S.c.me=u.phone;S.c.auth=1;S.c.err='';log('Customer '+u.phone+' signed in with verified phone');render()},
+ est(){S.c.est=fare(S.c.type,+S.c.min||60,+S.c.km||1,S.rules);render()},
+ pick(i){S.pickup={...POI[i]};S.c.est=null;render()},
+ book(){const b=S.cur={ref:'HZ'+Math.random().toString(16).slice(2,8).toUpperCase(),status:'REQUESTED',type:S.c.type,min:+S.c.min,km:+S.c.km,att:0,payStatus:'none',pickup:{...S.pickup},rules:{...S.rules},hist:[],cust:S.c.me,created:now(),dkm:null};S.bks.push(b);log('Customer created booking '+b.ref);go(b,'MATCHING','System');
+  S.d.declined=0;const d=S.drv[0];if(!(d.online&&d.approved&&d.status==='active'))go(b,'NO_DRIVER_AVAILABLE','System');else log('Offer sent to nearby approved driver');render()},
+ cancel(){go(S.cur,'CANCELLED_BY_CUSTOMER','Customer');render()},
+ pay(ok){const b=S.cur;if(!ok){go(b,'DISPUTED','Customer');b.payStatus='disputed'}else{go(b,'PAYMENT_SETTLED','Customer');b.payStatus='paid';S.led.push([b.ref,'cash_commission_due',b.fare.comm]);log('Ledger: commission owed by driver '+rs(b.fare.comm))}render()},
+ rate(n){S.c.rating=n;render()},again(){S.cur=null;S.c.est=null;S.c.rating=0;render()}};
+// ---- driver ----
+const D={
+ online(){const d=S.drv[0];if(!d.online&&Date.now()>d.exp){S.d.err='Your documents have expired.';return render()}d.online=!d.online;log('Driver went '+(d.online?'online':'offline'));render()},
+ accept(){const b=S.cur;if(b.status!=='MATCHING'){S.d.err='This request is no longer available.';return render()}b.drv=1;go(b,'DRIVER_ASSIGNED','Driver');S.d.err='';render()},
+ decline(){const b=S.cur;S.d.declined=1;if(b.status==='MATCHING')go(b,'NO_DRIVER_AVAILABLE','System');render()},
+ step(to){const b=S.cur;go(b,to,'Driver');if(to==='DRIVER_ARRIVED'){b.otp=String(Math.floor(1e5+Math.random()*9e5));log('Pickup code generated (hidden from driver)')}render()},
+ verify(){const b=S.cur;if(b.att>=5){S.d.err='Too many attempts. Ask support.';return render()}b.att++;if(S.d.code!==b.otp){S.d.err='Wrong code ('+(5-b.att)+' attempts left).';log('Pickup code attempt failed');return render()}S.d.err='';S.d.code='';go(b,'OTP_VERIFIED','Driver');render()},
+ start(){const b=S.cur;b.startedAt=now();go(b,'IN_PROGRESS','Driver');log('Trip start recorded using server time. Live tracking is now off.');render()},
+ end(){const b=S.cur;b.endedAt=now();if(b.type==='distance'&&!(+S.d.km>0)){S.d.err='Enter the trip distance in km.';return render()}b.fare=fare(b.type,runMin(b),+S.d.km,b.rules);go(b,'COMPLETED','Driver');go(b,'PAYMENT_PENDING','System');
+  S.led.push([b.ref,'driver_earning',b.fare.earn],[b.ref,'platform_commission',b.fare.comm],[b.ref,'tax_collected',b.fare.tax]);log('Fare '+rs(b.fare.total)+' after '+Math.round(runMin(b))+' min (rules v'+b.rules.ver+')');render()},
+ cash(){const b=S.cur;b.payStatus='driver_confirmed';log('Driver confirmed cash collected');render()},done(){S.cur=null;render()}};
+const stat=s=>'<span class="chip">'+s.replace(/_/g,' ').toLowerCase()+'</span>';
+const bill=b=>'<div class="card"><div class="h" style="margin-top:0">Final bill</div>'+b.fare.lines.map(l=>'<div class="row"><span>'+l[0]+'</span><span>'+rs(l[1])+'</span></div>').join('')+'<div class="row"><span>GST ('+b.rules.gst/100+'%)</span><span>'+rs(b.fare.tax)+'</span></div><div class="row tot"><span>Total</span><span>'+rs(b.fare.total)+'</span></div></div>';
+const head=t=>'<div class="ttl">'+LOGO(28)+'hyzz'+(t?'<span class="m2" style="font-weight:400;letter-spacing:0;margin-left:2px">'+t+'</span>':'')+'</div>';
+function custView(){const c=S.c,b=S.cur;let h=head('');
+ if(!c.auth){h+='<div class="h">Sign in</div><input class="in" placeholder="Mobile number" value="'+esc(c.phone)+'" oninput="S.c.phone=this.value">';
+  h+=!c.sent?'<button class="b" onclick="C.send()">Send code</button>':'<div class="card m2">Demo SMS: your code is <b>'+c.code+'</b></div><input class="in" placeholder="6-digit code" oninput="S.c.entered=this.value"><button class="b" onclick="C.verify()">Sign in</button>';
+  return h+'<div class="err">'+c.err+'</div>'}
+ const u=me();if(u.status!=='active')return h+'<div class="card">Your account is suspended. Contact support.</div>';
+ if(!b){h+='<div class="h">Where should the driver meet you?</div>'+mapBox('c')+'<div class="m2">Tap the map to move the pin, or choose a place.</div><div class="chips">'+POI.map((o,i)=>'<span onclick="C.pick('+i+')">'+o.n+'</span>').join('')+'</div><div class="card"><b>Pickup:</b> '+esc(S.pickup.n)+'<div class="m2">'+S.pickup.lat+', '+S.pickup.lng+'</div></div>';
+  h+='<select onchange="S.c.type=this.value;S.c.est=null;render()"><option value="hourly"'+(c.type==='hourly'?' selected':'')+'>Hourly</option><option value="distance"'+(c.type==='distance'?' selected':'')+'>Distance-based</option><option value="fullday"'+(c.type==='fullday'?' selected':'')+'>Full day (10 hours)</option></select>';
+  h+=c.type==='distance'?'<input class="in" type="number" min="1" value="'+c.km+'" oninput="S.c.km=this.value;S.c.est=null" placeholder="Estimated km">':'<input class="in" type="number" min="30" value="'+c.min+'" oninput="S.c.min=this.value;S.c.est=null" placeholder="Minutes needed">';
+  h+='<button class="b o" onclick="C.est()">Get fare estimate</button>';
+  if(c.est)h+='<div class="card">Estimate <b>'+rs(c.est.total)+'</b> including GST.<div class="m2">Final fare is based on actual trip time. No hidden fees.</div></div>';
+  return h+'<button class="b" onclick="C.book()">Confirm booking</button>'}
+ h+='<div class="h" style="margin-top:0">Booking '+b.ref+'</div>'+stat(b.status);
+ if(['MATCHING','DRIVER_ASSIGNED','DRIVER_EN_ROUTE','DRIVER_ARRIVED'].includes(b.status))h+='<div style="margin-top:8px">'+mapBox('c')+'</div>';
+ if(b.status==='MATCHING')h+='<div class="card">Finding a nearby driver…<div class="m2">Switch to the driver phone and accept.</div></div>';
+ if(b.status==='NO_DRIVER_AVAILABLE')h+='<div class="card">No drivers are available nearby. Go online on the driver phone, then try again.</div><button class="b" onclick="C.again()">Try again</button>';
+ if(['DRIVER_ASSIGNED','DRIVER_EN_ROUTE'].includes(b.status))h+='<div class="card"><b>Ravi K.</b> is on the way<div class="m2" id="eta">'+hav(S.drv[0].pos,b.pickup).toFixed(1)+' km</div><div class="m2">Live location is shown during pickup only.</div></div>';
+ if(b.status==='DRIVER_ARRIVED')h+='<div class="card">Your driver has arrived. Tell them this code:<div class="otp">'+b.otp+'</div></div>';
+ if(['OTP_VERIFIED','IN_PROGRESS'].includes(b.status))h+='<div class="card">'+(b.status==='IN_PROGRESS'?'Trip in progress. Live tracking is off during the trip.':'Code verified. Waiting for the driver to start.')+'</div>';
+ if(b.fare)h+=bill(b);
+ if(b.status==='PAYMENT_PENDING')h+=b.payStatus==='driver_confirmed'?'<div class="card">Driver says you paid '+rs(b.fare.total)+' in cash.</div><button class="b" onclick="C.pay(1)">Yes, I paid cash</button><button class="b o" onclick="C.pay(0)">Dispute</button>':'<div class="card m2">Pay your driver in cash. They will confirm collection.</div>';
+ if(b.status==='PAYMENT_SETTLED')h+='<div class="card">Paid. Rate your driver<div>'+[1,2,3,4,5].map(n=>'<span class="st'+(c.rating>=n?' on':'')+'" onclick="C.rate('+n+')">★</span>').join('')+'</div></div><button class="b" onclick="C.again()">Book another</button>';
+ if(b.status==='DISPUTED')h+='<div class="card">Dispute raised. Support will review it.</div><button class="b" onclick="C.again()">Back</button>';
+ if(b.status.startsWith('CANCELLED'))h+='<div class="card">'+(b.status==='CANCELLED_BY_ADMIN'?'Cancelled by Hyzz support.':'Booking cancelled.')+'</div><button class="b" onclick="C.again()">Back</button>';
+ if(['MATCHING','DRIVER_ASSIGNED','DRIVER_EN_ROUTE','DRIVER_ARRIVED'].includes(b.status))h+='<button class="b o" onclick="C.cancel()">Cancel booking</button>';
+ return h}
+function drvView(){const d=S.drv[0],b=S.cur,d_=S.d,own=b&&b.drv;let h=head('driver');
+ if(d.status!=='active')return h+'<div class="card">Your account is suspended'+(d.reason?': '+esc(d.reason):'')+'. Contact Hyzz support.</div>';
+ if(!d.approved)return h+'<div class="card">Your documents are '+d.docs+'. You can go online once they are approved.</div>';
+ const earn=S.led.filter(l=>l[1]==='driver_earning').reduce((a,l)=>a+l[2],0),due=S.led.filter(l=>l[1]==='cash_commission_due').reduce((a,l)=>a+l[2],0)-S.led.filter(l=>l[1]==='commission_settlement').reduce((a,l)=>a-l[2],0);
+ h+='<div class="m2">'+d.name+' · Approved · documents valid until '+new Date(d.exp).toLocaleDateString()+'</div><div class="card"><div class="row"><span>Earnings</span><b>'+rs(earn)+'</b></div><div class="row"><span>Commission owed (cash trips)</span><b>'+rs(due)+'</b></div></div>';
+ if(!own){h+='<button class="b'+(d.online?' o':'')+'" onclick="D.online()">'+(d.online?'Go offline':'Go online')+'</button>';
+  if(d.online)h+=mapBox('d');
+  if(d.online&&b&&b.status==='MATCHING'&&!d_.declined)h+='<div class="card"><div class="h" style="margin-top:0">New request '+b.ref+'</div><div>'+b.type+' · '+(b.type==='distance'?b.km+' km':b.min+' min')+'</div><div class="m2">Pickup '+hav(d.pos,b.pickup).toFixed(1)+' km away · '+esc(b.pickup.n)+'</div><button class="b" onclick="D.accept()">Accept</button><button class="b o" onclick="D.decline()">Decline</button></div>';
+  else if(d.online)h+='<div class="card m2">Online. Waiting for nearby requests…</div>';
+  return h+'<div class="err">'+d_.err+'</div>'}
+ h+='<div class="h">Booking '+b.ref+'</div>'+stat(b.status);
+ if(['DRIVER_ASSIGNED','DRIVER_EN_ROUTE','DRIVER_ARRIVED'].includes(b.status))h+='<div style="margin-top:8px">'+mapBox('d')+'</div><button class="b o" onclick="window.open(\'https://www.google.com/maps/dir/?api=1&destination='+b.pickup.lat+','+b.pickup.lng+'\',\'_blank\')">Navigate in Google Maps</button>';
+ const nx={DRIVER_ASSIGNED:['DRIVER_EN_ROUTE','I’m on my way'],DRIVER_EN_ROUTE:['DRIVER_ARRIVED','I’ve arrived']};
+ if(nx[b.status])h+='<div class="m2" id="eta">'+hav(d.pos,b.pickup).toFixed(1)+' km to pickup</div><button class="b" onclick="D.step(\''+nx[b.status][0]+'\')">'+nx[b.status][1]+'</button>';
+ if(b.status==='DRIVER_ARRIVED')h+='<div class="card">Ask the customer for their 6-digit code.<input class="in" placeholder="Pickup code" value="'+esc(d_.code)+'" oninput="S.d.code=this.value"><button class="b" onclick="D.verify()">Verify code</button></div>';
+ if(b.status==='OTP_VERIFIED')h+='<button class="b" onclick="D.start()">Start trip</button>';
+ if(b.status==='IN_PROGRESS'){h+='<div class="card">Running time <b id="run">'+fmt(runMin(b))+'</b><div class="m2">'+(runMin(b)>60+b.rules.grace?'Overtime is being billed.':'Within the included hour.')+'</div></div>';
+  if(b.type==='distance')h+='<input class="in" type="number" placeholder="Trip distance in km" value="'+d_.km+'" oninput="S.d.km=this.value">';h+='<button class="b" onclick="D.end()">End trip</button>'}
+ if(b.fare)h+=bill(b)+'<div class="card">Your earnings <b>'+rs(b.fare.earn)+'</b><div class="m2">Platform commission '+rs(b.fare.comm)+' ('+b.rules.comm/100+'% before GST)</div></div>';
+ if(b.status==='PAYMENT_PENDING')h+=b.payStatus==='driver_confirmed'?'<div class="card m2">Waiting for the customer to confirm.</div>':'<button class="b" onclick="D.cash()">I collected '+rs(b.fare.total)+' cash</button>';
+ if(['PAYMENT_SETTLED','DISPUTED'].includes(b.status)||b.status.startsWith('CANCELLED'))h+='<button class="b" onclick="D.done()">Done</button>';
+ return h+'<div class="err">'+d_.err+'</div>'}
+// ---- admin ----
+const actor=()=>S.emp[S.actor],can=p=>ROLES[actor().role].includes(p);
+const aud=m=>S.audit.unshift(tm()+'  '+actor().name+' ('+actor().role+'): '+m);
+function W(p,fn){if(!can(p+':w')){aud('DENIED '+p+' write');toast('403 Forbidden: your role cannot change '+p);return render()}fn();render()}
+const A={
+ appr(i){W('drivers',()=>{const d=S.drv[i];d.docs='approved';d.approved=1;aud('Approved documents for '+d.name);toast('Driver approved')})},
+ rej(i){W('drivers',()=>{const r=prompt('Reason for rejection (required)');if(!r)return toast('A reason is required');S.drv[i].docs='rejected';S.drv[i].approved=0;S.drv[i].online=0;aud('Rejected documents for '+S.drv[i].name+': '+r)})},
+ susp(i){W('drivers',()=>{const d=S.drv[i];if(d.status==='active'){const r=prompt('Reason for suspension (required)');if(!r)return toast('A reason is required');d.status='suspended';d.reason=r;d.online=0;aud('Suspended driver '+d.name+': '+r)}else{d.status='active';d.reason='';aud('Reactivated driver '+d.name)}})},
+ newDrv(){W('drivers',()=>{const n=$('nd').value.trim(),p=$('np').value.trim();if(!n||!/^\d{10}$/.test(p))return toast('Enter a name and 10-digit phone');S.drv.push({name:n,phone:p,docs:'pending',approved:0,status:'active',online:0,exp:Date.now()+365*864e5,pos:{lat:16.305,lng:80.44}});aud('Created driver '+n);toast('Driver created. Temporary password shown once: '+Math.random().toString(36).slice(2,10))})},
+ blk(i){W('customers',()=>{const u=S.cust[i];if(u.status==='active'){const r=prompt('Reason for suspension (required)');if(!r)return toast('A reason is required');u.status='suspended';aud('Suspended customer '+u.phone+': '+r)}else{u.status='active';aud('Reactivated customer '+u.phone)}})},
+ cancel(i){W('bookings',()=>{const b=S.bks[i],r=prompt('Reason for cancelling (required)');if(!r)return toast('A reason is required');if(!go(b,'CANCELLED_BY_ADMIN','Admin'))return toast('This booking can no longer be cancelled');aud('Cancelled '+b.ref+': '+r)})},
+ sel(i){S.sel=S.sel===i?null:i;render()},flt(v){S.filter=v;render()},
+ csv(){if(!can('bookings'))return toast('403 Forbidden');const rows=[['ref','status','type','total_inr','commission_inr','rules_version','customer']].concat(S.bks.map(b=>[b.ref,b.status,b.type,b.fare?b.fare.total/100:'',b.fare?b.fare.comm/100:'',b.rules.ver,b.cust]));
+  const u=URL.createObjectURL(new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'})),a=document.createElement('a');a.href=u;a.download='hyzz-bookings.csv';a.click();aud('Exported bookings CSV')},
+ price(){W('pricing',()=>{const g=id=>+$(id).value,r={ver:S.rules.ver+1,hr:Math.round(g('p1')*100),base:Math.round(g('p2')*100),dist:Math.round(g('p3')*100),day:Math.round(g('p4')*100),grace:g('p5'),gst:Math.round(g('p6')*100),comm:Math.round(g('p7')*100)};
+  if([r.hr,r.base,r.dist,r.day].some(x=>!(x>0))||r.comm<0||r.comm>5000)return toast('Check the values. Commission must be 0–50%.');S.rules=r;S.rlog.push({ver:r.ver,by:actor().name});aud('Published pricing rules v'+r.ver+' (applies to new bookings only)');toast('Rules v'+r.ver+' are live for new bookings')})},
+ settle(){W('finance',()=>{const due=S.led.filter(l=>l[1]==='cash_commission_due').reduce((a,l)=>a+l[2],0)+S.led.filter(l=>l[1]==='commission_settlement').reduce((a,l)=>a+l[2],0);if(due<=0)return toast('Nothing outstanding');S.led.push(['—','commission_settlement',-due]);aud('Recorded commission settlement '+rs(due));toast('Settlement recorded as a new ledger entry')})},
+ emp(){W('employees',()=>{const n=$('en').value.trim(),r=$('er').value;if(!n)return toast('Enter a name');if(!ROLES[r].every(p=>can(p)))return toast('403 Privilege escalation: you cannot grant permissions you do not hold');S.emp.push({name:n,role:r});aud('Created employee '+n+' as '+r);toast('Employee created')})}};
+const tag=(t,c)=>'<span class="tg '+c+'">'+t+'</span>';
+const tbl=(h,rows)=>'<div class="tw"><table><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+rows.map(r=>'<tr>'+r.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</table></div>';
+const sumKind=k=>S.led.filter(l=>l[1]===k).reduce((a,l)=>a+l[2],0);
+function admView(){
+ let h='<div class="sw" style="margin:0 0 6px">'+TABS.map(t=>'<button class="pill'+(S.tab===t?' on':'')+(can(t)?'':' lk')+'" onclick="S.tab=\''+t+'\';render()">'+t[0].toUpperCase()+t.slice(1)+(can(t)?'':' (locked)')+'</button>').join('')+'</div>';
+ if(!can(S.tab))return h+'<div class="panel"><h2>403 Forbidden</h2><p class="mu">Your role ('+actor().role+') does not have access to this module. The real API enforces this on the server, not only in the interface.</p></div>';
+ const t=S.tab,ro=can(t+':w')?'':'<p class="mu" style="font-size:13px">Read-only for your role.</p>';
+ if(t==='dashboard'){const bs=S.bks,done=bs.filter(b=>b.fare),gv=done.reduce((a,b)=>a+b.fare.total,0);
+  h+='<div class="panel"><h2>Overview</h2><div class="grid">'+[['Bookings',bs.length],['Completed',done.length],['Cancelled',bs.filter(b=>b.status.startsWith('CANCELLED')||b.status==='NO_DRIVER_AVAILABLE').length],['Gross booking value',rs(gv)],['Platform commission',rs(sumKind('platform_commission'))],['Commission outstanding',rs(sumKind('cash_commission_due')+sumKind('commission_settlement'))],['Drivers online',S.drv.filter(d=>d.online).length+' of '+S.drv.length],['Pending verification',S.drv.filter(d=>d.docs==='pending').length],['Customers',S.cust.length]].map(m=>'<div class="met"><span class="mu" style="font-size:12px">'+m[0]+'</span><b>'+m[1]+'</b></div>').join('')+'</div></div>';
+  h+='<div class="two"><div class="panel"><h2>Live map</h2>'+mapBox('a')+'<div class="mu" style="font-size:12px;margin-top:6px">Orange car: Ravi K. Grey cars: other online drivers. Red pin: active pickup.</div></div><div class="panel"><h2>Recent activity</h2><div class="lg">'+(S.log.slice(0,12).map(l=>'<div>'+esc(l)+'</div>').join('')||'<span class="mu">No activity yet. Use the apps tab to create a booking.</span>')+'</div></div></div>'}
+ if(t==='bookings'){const bs=S.bks.map((b,i)=>[b,i]).filter(x=>S.filter==='all'||(S.filter==='active'?!x[0].status.startsWith('CANCELLED')&&!['PAYMENT_SETTLED','NO_DRIVER_AVAILABLE','DISPUTED'].includes(x[0].status):x[0].status===S.filter));
+  h+='<div class="panel"><h2>Bookings</h2><div class="f"><div><label>Filter</label><select onchange="A.flt(this.value)">'+['all','active','PAYMENT_SETTLED','DISPUTED','CANCELLED_BY_ADMIN','NO_DRIVER_AVAILABLE'].map(v=>'<option value="'+v+'"'+(S.filter===v?' selected':'')+'>'+v.replace(/_/g,' ').toLowerCase()+'</option>').join('')+'</select></div><button class="bt" onclick="A.csv()">Export CSV</button></div>'+ro+
+  (bs.length?tbl(['Ref','Customer','Type','Status','Total','Rules',''],bs.map(([b,i])=>[b.ref,b.cust,b.type,tag(b.status.replace(/_/g,' ').toLowerCase(),b.status==='PAYMENT_SETTLED'?'g':b.status.startsWith('CANC')||b.status==='DISPUTED'?'r':'y'),b.fare?rs(b.fare.total):'—','v'+b.rules.ver,'<button class="bt" onclick="A.sel('+i+')">'+(S.sel===i?'Hide':'View')+'</button><button class="bt d" onclick="A.cancel('+i+')">Cancel</button>'])):'<p class="mu">No bookings match. Create one in the apps tab.</p>')+'</div>';
+  if(S.sel!=null&&S.bks[S.sel]){const b=S.bks[S.sel];h+='<div class="two"><div class="panel"><h2>Timeline '+b.ref+'</h2><div class="lg">'+b.hist.map(x=>'<div>'+esc(x)+'</div>').join('')+'</div></div><div class="panel"><h2>Fare snapshot</h2>'+(b.fare?tbl(['Item','Amount'],b.fare.lines.map(l=>[l[0],rs(l[1])]).concat([['GST',rs(b.fare.tax)],['Total',rs(b.fare.total)],['Commission',rs(b.fare.comm)],['Driver earnings',rs(b.fare.earn)]])):'<p class="mu">Fare is calculated when the trip ends.</p>')+'<p class="mu" style="font-size:12px">Calculated with pricing rules v'+b.rules.ver+'. Completed bookings never change when rules change.</p></div></div>'}}
+ if(t==='drivers')h+='<div class="panel"><h2>Drivers</h2>'+ro+tbl(['Driver','Phone','Documents','Expiry','Status','Online',''],S.drv.map((d,i)=>{const dl=Math.round((d.exp-Date.now())/864e5);return[d.name,d.phone,tag(d.docs,d.docs==='approved'?'g':d.docs==='pending'?'y':'r'),dl<30?tag('expires in '+dl+' days','y'):new Date(d.exp).toLocaleDateString(),tag(d.status,d.status==='active'?'g':'r'),d.online?'Yes':'No','<button class="bt" onclick="A.appr('+i+')">Approve</button><button class="bt" onclick="A.rej('+i+')">Reject</button><button class="bt d" onclick="A.susp('+i+')">'+(d.status==='active'?'Suspend':'Reactivate')+'</button>']}))+'<div class="f"><div><label>New driver name</label><input id="nd"></div><div><label>Phone</label><input id="np"></div><button class="bt" onclick="A.newDrv()">Create driver account</button></div><p class="mu" style="font-size:12px">There is no public driver sign-up. Drivers get a one-time temporary password and must change it at first login. Suspensions need a reason and block the driver immediately.</p></div>';
+ if(t==='customers')h+='<div class="panel"><h2>Customers</h2>'+ro+tbl(['Name','Phone','Bookings','Status',''],S.cust.map((u,i)=>[u.name,u.phone,S.bks.filter(b=>b.cust===u.phone).length,tag(u.status,u.status==='active'?'g':'r'),'<button class="bt d" onclick="A.blk('+i+')">'+(u.status==='active'?'Suspend':'Reactivate')+'</button>']))+'</div>';
+ if(t==='pricing'){const r=S.rules,f=(id,l,v)=>'<div><label>'+l+'</label><input id="'+id+'" type="number" step="any" value="'+v+'"></div>';
+  h+='<div class="panel"><h2>Pricing and commission (active: v'+r.ver+')</h2>'+ro+'<div class="f">'+f('p1','Hourly rate (₹)',r.hr/100)+f('p2','Base fare (₹)',r.base/100)+f('p3','Per km (₹)',r.dist/100)+f('p4','Full-day package (₹)',r.day/100)+f('p5','Grace (min)',r.grace)+f('p6','GST (%)',r.gst/100)+f('p7','Driver commission (%)',r.comm/100)+'<button class="bt" onclick="A.price()">Publish new version</button></div><p class="mu" style="font-size:12px">New versions apply to new bookings only. Commission is calculated on the fare before GST. Version history: '+S.rlog.map(x=>'v'+x.ver+' by '+esc(x.by)).join(', ')+'.</p></div>'}
+ if(t==='finance'){const due=sumKind('cash_commission_due')+sumKind('commission_settlement');
+  h+='<div class="panel"><h2>Finance</h2>'+ro+'<div class="grid"><div class="met"><span class="mu" style="font-size:12px">Driver earnings</span><b>'+rs(sumKind('driver_earning'))+'</b></div><div class="met"><span class="mu" style="font-size:12px">Commission</span><b>'+rs(sumKind('platform_commission'))+'</b></div><div class="met"><span class="mu" style="font-size:12px">GST collected</span><b>'+rs(sumKind('tax_collected'))+'</b></div><div class="met"><span class="mu" style="font-size:12px">Commission owed by drivers</span><b>'+rs(due)+'</b></div></div><div class="f"><button class="bt" onclick="A.settle()">Record commission settlement</button></div>'+(S.led.length?tbl(['Booking','Entry','Amount'],S.led.map(l=>[l[0],l[1].replace(/_/g,' '),rs(l[2])])):'<p class="mu">Ledger entries appear when trips complete. Entries are never edited. Corrections are new entries.</p>')+'</div>'}
+ if(t==='employees')h+='<div class="panel"><h2>Employees and roles</h2>'+ro+tbl(['Name','Role'],S.emp.map(e=>[e.name,e.role]))+'<div class="f"><div><label>Name</label><input id="en"></div><div><label>Role</label><select id="er">'+Object.keys(ROLES).map(r=>'<option>'+r+'</option>').join('')+'</select></div><button class="bt" onclick="A.emp()">Create employee</button></div><p class="mu" style="font-size:12px">Try "Acting as" Operations Manager and create a Super Admin. It is refused because you cannot grant permissions you do not hold.</p>'+tbl(['Role','Access'],Object.entries(ROLES).map(([r,p])=>[r,p.filter(x=>!x.includes(':')).map(x=>x+(p.includes(x+':w')?'':' (read)')).join(', ')]))+'</div>';
+ if(t==='audit')h+='<div class="panel"><h2>Audit log</h2><div class="lg">'+(S.audit.map(l=>'<div>'+esc(l)+'</div>').join('')||'<span class="mu">Admin actions are recorded here, including denied attempts.</span>')+'</div></div>';
+ return h}
+function render(){
+ $('demo').style.display=S.view==='demo'?'':'none';$('admin').style.display=S.view==='admin'?'':'none';$('actW').style.display=S.view==='admin'?'':'none';
+ $('vD').className='pill'+(S.view==='demo'?' on':'');$('vA').className='pill'+(S.view==='admin'?' on':'');
+ $('act').innerHTML=S.emp.map((e,i)=>'<option value="'+i+'"'+(i===S.actor?' selected':'')+'>'+esc(e.name)+' – '+e.role+'</option>').join('');
+ if(S.view==='demo'){$('cust').innerHTML=custView();$('drv').innerHTML=drvView();
+  $('log').innerHTML=S.log.map(l=>'<div>'+esc(l)+'</div>').join('')||'<span class="mu">Nothing yet.</span>';$('clk').textContent=offset?'Demo clock +'+Math.round(offset/60000)+' min':''}
+ else $('adm').innerHTML=admView()}
+render();
+</script>
+</body>
+</html>

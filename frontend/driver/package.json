@@ -1,0 +1,10 @@
+{
+  "name": "hyzz-driver",
+  "private": true,
+  "version": "1.5.0",
+  "scripts": {
+    "start": "node ../../scripts/mobile-cli.cjs driver start",
+    "android": "node ../../scripts/mobile-cli.cjs driver android",
+    "build:apk": "powershell -NoProfile -ExecutionPolicy Bypass -File ../../scripts/build-apks.ps1 -Variant driver"
+  }
+}

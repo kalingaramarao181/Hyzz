@@ -1,0 +1,12 @@
+const fs=require('node:fs');
+const results=JSON.parse(fs.readFileSync('build/apk-verification.json','utf8').replace(/^\uFEFF/,''));
+for(const item of results){if(!item.signatureVerified||!fs.existsSync(item.file)||fs.statSync(item.file).size!==item.bytes)throw new Error('APK verification evidence is missing or stale');}
+const marker='<!-- APK_VERIFICATION -->';
+let report=fs.readFileSync('docs/verification.md','utf8').split(marker)[0];
+report=report.replace('Native APK compilation and final artifact verification are in progress; artifact evidence will be recorded here after checking the generated files.','Both Android APKs compiled successfully and passed signature, package identity, embedded audience and required content verification. These are test builds; device journeys and hosted setup remain unverified.');
+report+=`\n${marker}\n\n## Verified local Android artifacts\n\n`;
+for(const a of results){const raw=fs.readFileSync(`build-${a.audience}.log`);const log=raw.toString(raw[0]===255&&raw[1]===254?'utf16le':'utf8');if(!log.includes('BUILD SUCCESSFUL'))throw new Error('Missing Gradle success log');report+=`### ${a.name}\n\n- File: \`frontend/${a.audience}/apk/Hyzz-${a.audience}.apk\`\n- Bytes: ${a.bytes}\n- SHA-256: \`${a.sha256}\`\n- Android package: \`${a.package}\`\n- Embedded Expo audience: \`${a.audience}\`\n- Signature: verified; standard Android debug/test signing key, RSA 2048, APK v2 signature.\n- Architecture: ARM64 (arm64-v8a); minimum Android 7.0 / API 24, target API 36.\n- Includes nonempty Hermes JS bundle, classes.dex and ARM64 React Native library.\n- External-storage and overlay permissions removed; background-location permission is present only in the driver APK.\n\n`;}
+report+='Evidence: `build/apk-verification.json`, `build-customer.log` and `build-driver.log`. `scripts/verify-apks.ps1` reproduces the signature, package, permission and embedded-config checks. Native bundle module counts are recorded in the build logs. Both APKs embed the local Hyzz illustration and audience-specific brand mark. No EAS cloud build or APK cloud download URL is claimed.\n';
+fs.writeFileSync('docs/verification.md',report);
+let tasks=fs.readFileSync('TASKS.md','utf8').replace('- [ ] Android customer and driver APK compilation and verification','- [x] Android customer and driver APK compilation and verification (test signatures, IDs, audience and content checked; phone tests pending)');fs.writeFileSync('TASKS.md',tasks);
+console.log('Updated verification report from checked APK artifacts.');

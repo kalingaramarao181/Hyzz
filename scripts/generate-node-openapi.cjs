@@ -1,0 +1,37 @@
+const fs=require('fs');
+const contracts=JSON.parse(fs.readFileSync('backend/src/modules/action-contracts.json'));
+const spec={openapi:'3.1.0',info:{title:'Hyzz standalone Node API',version:'1.5.0'},servers:[{url:'https://api.srtechcreators.in'}],security:[{userJWT:[]}],components:{securitySchemes:{userJWT:{type:'http',scheme:'bearer',bearerFormat:'JWT'}}},paths:{}};
+const failures={400:{description:'Validation/business rejection'},401:{description:'Invalid session'},403:{description:'Permission/account rejected'},413:{description:'Body/upload too large'},429:{description:'Rate limited'},503:{description:'Missing configuration or provider unavailable'}};
+const json=schema=>({required:true,content:{'application/json':{schema}}});
+function post(path,summary,schema,{publicRoute=false,status=200}={}){const operation={summary,responses:{[status]:{description:'Operation result; inspect ok for OTP verification'},...failures}};if(schema)operation.requestBody=json(schema);if(publicRoute)operation.security=[];spec.paths[path]={post:operation};}
+for(const[name,schema]of Object.entries(contracts))post('/api/v1/actions/'+name,name,schema);
+post('/api/v1/auth/otp','Send email OTP',{type:'object',required:['email'],properties:{email:{type:'string',format:'email'},create_user:{type:'boolean'}}},{publicRoute:true});
+post('/api/v1/auth/verify','Verify email OTP',{type:'object',required:['email','token','type'],properties:{email:{type:'string',format:'email'},token:{type:'string',pattern:'^[0-9]{6,10}$'},type:{const:'email'}}},{publicRoute:true});
+post('/api/v1/auth/token','Refresh session (grant_type=refresh_token query required)',{type:'object',required:['refresh_token'],properties:{refresh_token:{type:'string'}}},{publicRoute:true});
+spec.paths['/api/v1/auth/user']={get:{responses:{200:{description:'Authenticated user'},...failures}}};post('/api/v1/auth/logout','Sign out; scope query supports local/global/others',null,{status:204});
+post('/api/v1/admin/accounts','Create a driver/employee with server credentials',{type:'object',required:['email','name','kind'],properties:{email:{type:'string',format:'email'},name:{type:'string',minLength:2,maxLength:100},kind:{enum:['driver','employee','customer']},role:{type:['string','null']}}},{status:201});
+for(const resource of ['bookings','support_tickets','driver_documents','financial_ledger_entries','notification_records','pricing_rules','system_settings','roles','role_permissions','account_deletion_requests','service_areas','customer_vehicles','vehicle_documents'])spec.paths['/api/v1/data/'+resource]={get:{summary:'Bounded RLS-protected read',parameters:[{in:'query',name:'select',schema:{type:'string',default:'*'}},{in:'query',name:'limit',schema:{type:'integer',maximum:1000,default:100}},{in:'query',name:'offset',schema:{type:'integer',maximum:100000}}],responses:{200:{description:'Authorized rows'},...failures}}};
+post('/api/v1/documents/sign/{path}','Get a private viewing URL',{type:'object',required:['expiresIn'],properties:{expiresIn:{const:60}}});
+post('/api/v1/documents/upload/{path}','Upload private PDF/PNG/JPEG, max 4 MiB');
+const uploadSchema={type:'object',required:['file'],properties:{file:{type:'string',format:'binary'}}};
+spec.paths['/api/v1/documents/upload/{path}'].post.requestBody={required:true,content:{'multipart/form-data':{schema:uploadSchema}}};
+for(const operation of ['sign','upload'])spec.paths['/api/v1/documents/'+operation+'/{path}'].post.parameters=[{in:'path',name:'path',required:true,description:'driver UUID / filename, encode each path segment',schema:{type:'string'}}];
+spec.paths['/health']={get:{security:[],responses:{200:{description:'Node process liveness; not hosted provider readiness'}}}};
+spec.paths['/api/v1/capabilities']={get:{security:[],responses:{200:{description:'Provider feature flags; tracking enabled'}}}};
+post('/api/v1/maps/route','Road route with explicit unavailable fallback',{type:'object',required:['from','to'],properties:{from:{type:'object'},to:{type:'object'}}});
+for(const operation of ['sign','upload'])spec.paths['/api/v1/documents/vehicles/'+operation+'/{path}']=spec.paths['/api/v1/documents/'+operation+'/{path}'];
+spec.paths['/api/v1/auth/authorize']={get:{security:[],summary:'Optional Google PKCE redirect; provider, redirect_to, code_challenge, code_challenge_method=s256 required',responses:{302:{description:'Configured Supabase Google authorization'},...failures}}};
+spec.paths['/api/internal/push']={get:{summary:'Server scheduler only; CRON_SECRET bearer authentication, never a user session',security:[{workerSecret:[]}],responses:{200:{description:'Notification batch processing summary'},...failures}}};
+spec.components.securitySchemes.workerSecret={type:'http',scheme:'bearer'};
+post('/api/v1/bank/details','Driver-only encrypted bank update; returns masked account suffix',{type:'object',additionalProperties:false,required:['name','account','ifsc'],properties:{name:{type:'string',minLength:2,maxLength:100},account:{type:'string',pattern:'^[0-9]{9,18}$'},ifsc:{type:'string',pattern:'^[A-Z]{4}0[A-Z0-9]{6}$'}}});
+post('/api/v1/bank/payout/{id}/reveal','Finance.manage only; audited reveal of payout bank snapshot');
+spec.paths['/api/v1/bank/payout/{id}/reveal'].post.parameters=[{in:'path',name:'id',required:true,schema:{type:'string',format:'uuid'}}];
+
+for(const path of ['/api/v1/public/content','/api/v1/releases/latest/{audience}','/api/v1/releases/{id}/download'])spec.paths[path]={get:{security:[],summary:'Published public content or APK metadata/download; draft releases remain private',responses:{200:{description:'Published data'},302:{description:'Short-lived APK download redirect'},...failures}}};
+post('/api/v1/public/contact','Rate-limited consented contact enquiry',{type:'object',required:['name','email','topic','message','consent'],properties:{name:{type:'string'},email:{type:'string',format:'email'},phone:{type:['string','null']},topic:{enum:['customer','driver','business','support']},message:{type:'string',minLength:10,maxLength:2000},consent:{const:true},website:{const:''}},additionalProperties:false},{publicRoute:true,status:201});
+post('/api/v1/admin/releases/upload','Release permission: draft and private signed direct-upload capability',{type:'object',required:['audience','version','version_code','notes'],properties:{audience:{enum:['driver','customer']},version:{type:'string'},version_code:{type:'integer',minimum:1},notes:{type:'string',minLength:5,maxLength:2000}},additionalProperties:false});
+post('/api/v1/admin/releases/{id}/publish','Release permission: inspect uploaded APK, hash bytes, publish and queue notices',{type:'object',properties:{signature_checked:{const:true}},required:['signature_checked'],additionalProperties:false});
+post('/api/v1/admin/releases/notify','Release permission: process next announcement batch');
+for(const path of ['/api/v1/releases/{id}/download','/api/v1/admin/releases/{id}/publish']){const op=spec.paths[path].get||spec.paths[path].post;op.parameters=[{in:'path',name:'id',required:true,schema:{type:'string',format:'uuid'}}];}
+spec.paths['/api/v1/releases/latest/{audience}'].get.parameters=[{in:'path',name:'audience',required:true,schema:{enum:['customer','driver']}}];
+fs.writeFileSync('backend/openapi.json',JSON.stringify(spec,null,2)+'\n');fs.copyFileSync('backend/openapi.json','docs/openapi.json');console.log(`Generated ${Object.keys(spec.paths).length} Node API path definitions.`);
